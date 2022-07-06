@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="title">
+  Welcome, {{ name }}!
+</h1>
+{% if voter%}
+  <h1 class="subtitle has-text-danger"> Your vote has been cast.</h1>
+  
+{%else%}
+  <h2 class="subtitle">
+      You can cast your vote here.<br>
+  </h2>
+  <div class="columns">
+      <div class="column is-4">
+        <img src="https://amplifier.org/wp-content/uploads/2020/09/Never-Made_Vote-Your-Future_Hi-Res-Credits-scaled.jpg">
+      </div>
+      <div class="column is-4 ">
+        
+        <div class="box">
+        <h3 class="title has-text-dark">Ballot Box</h3>
+
+        Do take a look at the <a href="{{ url_for('candidate') }}"><u>candidates</u> </a> standing in the election before casting your vote.
+        <br> <br>
+
+        <form method="POST" action="/profile">
+          <div class="field ">
+            <label class="label">President</label>
+            <div class="select" >
+              <select name="president">
+                {% for prez in prez %}
+                    <option value ={{prez.voter_num}}>{{prez.first_name}} {{prez.last_name}} ({{prez.voter_num}})</option>
+                {% endfor %}
+              </select>
+            </div>
+            
+          </div>
+          <div class="field">
+            <label class="label">Vice-President</label>
+              <div class="select" >
+              <select name="vice-president">
+                {% for vice in vice %}
+                    <option value ={{vice.voter_num}}>{{vice.first_name}} {{vice.last_name}} ({{vice.voter_num}})</option>
+                {% endfor %}
+              </select>
+              </div>
+              <br>
+              <br>
+
+            <div class="field">
+              <button class="button  is-success">Cast Vote</button>
+            </div>
+
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="column is-4">
+      <img src="https://media.itsnicethat.com/images/Amanda_Phingbodhipakkiya_vote_your_future_tim.width-1440_6y7j6cDwWsjXnAnf.jpg">
+    </div>
+  </div>
+  {% endif %}
+{% endblock %}

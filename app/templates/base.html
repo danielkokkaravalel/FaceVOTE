@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FaceVOTE</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename = 'images/favicon.png') }}">
+    {% block styles %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.css" />
+    {% endblock %}
+</head>
+
+<body>
+    <section class="hero is-light is-fullheight">
+
+        <div class="hero-head">
+            <nav class="navbar is-warning" role="navigation" aria-label="main navigation" href="/_">
+                <div class="navbar-brand">
+                    <a class="navbar-item has-text-weight-bold is-italic has-text-dark is-transparent">
+                        <img src="{{ url_for('static', filename = 'images/logo.png') }}">
+                     FaceVOTE
+                    </a>
+                </div>    
+                <div class="container is-warning">
+                    <div id="navbarMenuHeroA" class="navbar-menu">
+    
+                        <div class="navbar-end">
+                            <a href="{{ url_for('index') }}" class="navbar-item has-text-dark is-large">
+                                Home
+                            </a>
+                            <a href="{{ url_for('candidate') }}" class="navbar-item has-text-dark">
+                                Candidate Info
+                            </a>
+                            {% if current_user.is_authenticated %}
+                            <a href="{{ url_for('profile') }}" class="navbar-item has-text-dark">
+                                Vote
+                            </a>
+                            {% endif %}
+                            {% if current_user.is_authenticated %}
+                            <a href="{{ url_for('edit_member') }}" class="navbar-item has-text-dark">
+                                Edit Details
+                            </a>
+                            {% endif %}
+                            <a href="{{ url_for('live_result') }}" class="navbar-item has-text-dark">
+                                Live Result
+                            </a>
+                            {% if not current_user.is_authenticated %}
+                            <a href="{{ url_for('auth.login') }}" class="navbar-item has-text-dark">
+                                Login
+                            </a>
+                            <a href="{{ url_for('auth.register') }}" class="navbar-item has-text-dark">
+                                Sign Up
+                            </a>
+                            {% endif %}
+                            {% if current_user.admin == 1 %}
+                            <a href="{{ url_for('candidate_register') }}" class="navbar-item has-text-dark">
+                                Register Candidate
+                            </a>
+                            {% endif %}
+                            {% if current_user.is_authenticated %}
+                            <a href="{{ url_for('auth.logout') }}" class="navbar-item has-text-dark">
+                                Logout
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <div class="hero-body">
+            <div class="container has-text-centered">
+               {% block content %}
+               {% endblock %}
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
