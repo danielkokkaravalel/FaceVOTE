@@ -1,2 +1,2 @@
 # FaceVOTE
-An online voting system build on Flask and PostgresSQL
+An online voting system with facial recognition build on Flask and PostgresSQL
